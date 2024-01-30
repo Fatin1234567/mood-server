@@ -6,6 +6,7 @@ package com.fatin.moodserver.Model;
 import jakarta.persistence.*;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_account")
@@ -20,6 +21,29 @@ public class UserAccount {
 
     @Column(nullable = false)
     private String email;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<MoodEntry> moodEntries;
+
+    // Getters and Setters for moodEntries
+    public Set<MoodEntry> getMoodEntries() {
+        return moodEntries;
+    }
+
+    public void setMoodEntries(Set<MoodEntry> moodEntries) {
+        this.moodEntries = moodEntries;
+    }
+
+    // Add convenience methods for adding and removing MoodEntry
+    public void addMoodEntry(MoodEntry moodEntry) {
+        moodEntries.add(moodEntry);
+        moodEntry.setUser(this);
+    }
+
+    public void removeMoodEntry(MoodEntry moodEntry) {
+        moodEntries.remove(moodEntry);
+        moodEntry.setUser(null);
+    }
 
     // Standard getters and setters
 
