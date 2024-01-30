@@ -18,6 +18,13 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/exists")
+    public boolean userExists(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+        String accessToken = authorizationHeader.replace("Bearer ", "");
+        String email = userInfoService.getUserEmail(accessToken);
+        return userService.userExist(email);
+    }
+
     @GetMapping("/name")
     public String getUserName(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
         // Extract the token from the Authorization header

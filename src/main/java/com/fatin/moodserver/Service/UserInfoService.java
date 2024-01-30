@@ -1,5 +1,6 @@
 package com.fatin.moodserver.Service;
 
+import com.fatin.moodserver.Model.UserInfoResponse;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,9 @@ public class UserInfoService {
         this.restTemplate = restTemplateBuilder.build();
     }
 
-    public String getUserInfo(String accessToken) {
+
+
+    public UserInfoResponse getUserInfo(String accessToken) {
         String url = "https://api.amazon.com/user/profile";
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + accessToken);
@@ -29,32 +32,27 @@ public class UserInfoService {
 
         try {
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-            return response.getBody();
+            JSONObject jsonObj = new JSONObject(response.getBody());
+
+            String name = jsonObj.optString("name", "Default Name");
+            String email = jsonObj.optString("email", "No email provided");
+
+            return new UserInfoResponse(name, email);
         } catch (Exception e) {
             // Handle exceptions appropriately
-            return "Error: " + e.getMessage();
+            // Depending on your error handling, you might want to throw an exception or return a response indicating the error
+            return new UserInfoResponse("Error: " + e.getMessage(), "Error: " + e.getMessage());
         }
     }
 
+
+
+
     public String getUserName(String accessToken) {
-        String userInfoJson = getUserInfo(accessToken);
-        try {
-            JSONObject jsonObj = new JSONObject(userInfoJson);
-            return jsonObj.optString("name", "Default Name"); // "Default Name" is a fallback if the name is not present
-        } catch (Exception e) {
-            // Handle exceptions appropriately
-            return "Error parsing user info: " + e.getMessage();
-        }
+        return getUserInfo(accessToken).getName();
     }
 
     public String getUserEmail(String accessToken) {
-        String userInfoJson = getUserInfo(accessToken);
-        try {
-            JSONObject jsonObj = new JSONObject(userInfoJson);
-            return jsonObj.optString("email", "No email provided"); // "No email provided" is a fallback if the email is not present
-        } catch (Exception e) {
-            // Handle exceptions appropriately
-            return "Error parsing user info for email: " + e.getMessage();
-        }
+        return getUserInfo(accessToken).getEmail();
     }
 }
