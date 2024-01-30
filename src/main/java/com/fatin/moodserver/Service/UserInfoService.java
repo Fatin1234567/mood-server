@@ -46,4 +46,15 @@ public class UserInfoService {
             return "Error parsing user info: " + e.getMessage();
         }
     }
+
+    public String getUserEmail(String accessToken) {
+        String userInfoJson = getUserInfo(accessToken);
+        try {
+            JSONObject jsonObj = new JSONObject(userInfoJson);
+            return jsonObj.optString("email", "No email provided"); // "No email provided" is a fallback if the email is not present
+        } catch (Exception e) {
+            // Handle exceptions appropriately
+            return "Error parsing user info for email: " + e.getMessage();
+        }
+    }
 }

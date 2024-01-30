@@ -20,6 +20,7 @@ public class UserController {
     public String getUserName(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
         // Extract the token from the Authorization header
         String accessToken = authorizationHeader.replace("Bearer ", "");
+        String email = userInfoService.getUserEmail(accessToken);
         return userInfoService.getUserName(accessToken);
     }
 
