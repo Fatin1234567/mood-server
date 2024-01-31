@@ -1,19 +1,27 @@
 package com.fatin.moodserver.Model;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserRegistrationResponse {
-    private final boolean success;
+
+
+    @JsonProperty("isRegistered")
+    private final boolean isRegistered;
+
+    @JsonProperty("email")
     private final String email;
+    @JsonProperty("username")
+
     private final String username;
 
-    public UserRegistrationResponse(boolean success, String email, String username) {
-        this.success = success;
+    public UserRegistrationResponse(boolean isRegistered, String email, String username) {
+        this.isRegistered = isRegistered;
         this.email = email;
         this.username = username;
     }
 
     // Getters
     public boolean isSuccess() {
-        return success;
+        return isRegistered;
     }
 
     public String getEmail() {

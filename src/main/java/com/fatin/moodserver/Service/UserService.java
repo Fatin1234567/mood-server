@@ -25,9 +25,6 @@ public class UserService {
         this.userInfoService = userInfoService;
     }
 
-    public void registerUser(UserAccount userAccount){
-        userRepo.save(userAccount);
-    }
 
     public boolean userExist(String email){
         return userRepo.findByEmail(email).isPresent();
@@ -41,7 +38,7 @@ public class UserService {
         Optional<UserAccount> existingUser = userRepo.findByEmail(userInfoResponse.getEmail());
         if (existingUser.isPresent()) {
             // User already exists, return false
-            return new UserRegistrationResponse(false, userInfoResponse.getEmail(), userInfoResponse.getName());
+            return new UserRegistrationResponse(true, userInfoResponse.getEmail(), userInfoResponse.getName());
         }
 
         // Logic to register the new user
@@ -51,7 +48,7 @@ public class UserService {
         userRepo.save(newUser);
 
         // User successfully registered
-        return new UserRegistrationResponse(true, userInfoResponse.getEmail(), userInfoResponse.getName());
+        return new UserRegistrationResponse(false, userInfoResponse.getEmail(), userInfoResponse.getName());
     }
 
 
