@@ -17,7 +17,7 @@ public class MoodEntry {
     private UserAccount user;
 
     @Column(nullable = false)
-    private String moodType;
+    private String mood;
 
     @Column(nullable = false)
     private Integer intensity;
@@ -41,12 +41,12 @@ public class MoodEntry {
         this.user = user;
     }
 
-    public String getMoodType() {
-        return moodType;
+    public String getMood() {
+        return mood;
     }
 
-    public void setMoodType(String moodType) {
-        this.moodType = moodType;
+    public void setMood(String mood) {
+        this.mood = mood;
     }
 
     public Integer getIntensity() {

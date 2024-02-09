@@ -30,6 +30,11 @@ public class UserService {
         return userRepo.findByEmail(email).isPresent();
     }
 
+    public UserAccount getUser(String email){
+        return userRepo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
     public UserRegistrationResponse registerUser(String token) {
         // Decode the token and extract email and username
         UserInfoResponse userInfoResponse = userInfoService.getUserInfo(token);
