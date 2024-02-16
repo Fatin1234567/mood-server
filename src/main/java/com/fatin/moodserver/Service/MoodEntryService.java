@@ -7,6 +7,9 @@ import com.fatin.moodserver.Repository.MoodEntryRepository;
 import com.fatin.moodserver.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 public class MoodEntryService {
 
@@ -28,4 +31,10 @@ public class MoodEntryService {
 
         moodEntryRepo.save(moodEntry);
     }
+
+    public List<MoodEntry> getMoodEntriesBetween(UserAccount user, LocalDateTime start, LocalDateTime end) {
+        return moodEntryRepo.findByUserAndTimestampBetween(user, start, end);
+    }
+
+
 }
