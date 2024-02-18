@@ -1,5 +1,6 @@
 package com.fatin.moodserver.Model;
 
+import com.fatin.moodserver.Service.MoodEntryService;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -7,6 +8,15 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "mood_entries")
 public class MoodEntry {
+    public MoodEntry(UserAccount user, String mood, Integer intensity, LocalDateTime timestamp, String reason) {
+        this.user = user;
+        this.mood = mood;
+        this.intensity = intensity;
+        this.timestamp = timestamp;
+        this.reason = reason;
+    }
+
+    public MoodEntry(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,6 +4,39 @@ import java.util.Map;
 
 public class MoodSummaryResponse {
     private double averageIntensity;
+
+    public double getAverageIntensity() {
+        return averageIntensity;
+    }
+
+    public void setAverageIntensity(double averageIntensity) {
+        this.averageIntensity = averageIntensity;
+    }
+
+    public String getMostCommonMood() {
+        return mostCommonMood;
+    }
+
+    public void setMostCommonMood(String mostCommonMood) {
+        this.mostCommonMood = mostCommonMood;
+    }
+
+    public int getEntryCount() {
+        return entryCount;
+    }
+
+    public void setEntryCount(int entryCount) {
+        this.entryCount = entryCount;
+    }
+
+    public Map<String, Integer> getMoodCounts() {
+        return moodCounts;
+    }
+
+    public void setMoodCounts(Map<String, Integer> moodCounts) {
+        this.moodCounts = moodCounts;
+    }
+
     private String mostCommonMood;
     private int entryCount;
     private Map<String, Integer> moodCounts; // Mood and their counts
