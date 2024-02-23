@@ -8,12 +8,15 @@ public class MoodDetail {
     private int intensity;
     private String reason;
 
+    private int weekLabel;
+
     // Constructor
-    public MoodDetail(LocalDate date, String mood, int intensity, String reason) {
+    public MoodDetail(LocalDate date, String mood, int intensity, String reason, int weekLabel) {
         this.date = date;
         this.mood = mood;
         this.intensity = intensity;
         this.reason = reason;
+        this.weekLabel = weekLabel;
     }
 
     // Getters and Setters

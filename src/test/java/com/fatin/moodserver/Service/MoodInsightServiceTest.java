@@ -42,7 +42,7 @@ public class MoodInsightServiceTest {
     @Test
     public void testProcessMoodEntriesWithNoEntries() {
         List<MoodEntry> moodEntries = List.of();
-        MoodSummaryResponse response = moodInsightService.processMoodEntries(moodEntries);
+        MoodSummaryResponse response = moodInsightService.processMoodEntries(moodEntries, LocalDateTime.now());
 
         assertThat(response.getAverageIntensity()).isEqualTo(0);
         assertThat(response.getMostCommonMood()).isEmpty();
@@ -61,7 +61,8 @@ public class MoodInsightServiceTest {
                 new MoodEntry(user, "Happy", 6, LocalDateTime.now().minusDays(2), "Another good day")
         );
 
-        MoodSummaryResponse response = moodInsightService.processMoodEntries(moodEntries);
+
+        MoodSummaryResponse response = moodInsightService.processMoodEntries(moodEntries, LocalDateTime.now());
 
         assertThat(response.getAverageIntensity()).isEqualTo((8 + 4 + 6) / 3.0);
         assertThat(response.getMostCommonMood()).isEqualTo("Happy");
@@ -90,7 +91,7 @@ public class MoodInsightServiceTest {
                 });
 
         // Adjust the moodInsightService method to filter entries based on the timeframe
-        MoodSummaryResponse summary = moodInsightService.getSummaryInsight(user, "1");
+        MoodSummaryResponse summary = moodInsightService.getSummaryInsight(user, "week1");
 
         // Assertions
         assertThat(summary.getEntryCount()).isEqualTo(2); // Expecting 2 entries for the last week
