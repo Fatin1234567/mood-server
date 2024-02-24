@@ -1,5 +1,6 @@
 package com.fatin.moodserver.Model.Respose.InsightResponse;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class MoodDetail {
@@ -9,6 +10,11 @@ public class MoodDetail {
     private String reason;
 
     private int weekLabel;
+
+
+
+
+
 
     // Constructor
     public MoodDetail(LocalDate date, String mood, int intensity, String reason, int weekLabel) {
@@ -35,7 +41,6 @@ public class MoodDetail {
     public void setMood(String mood) {
         this.mood = mood;
     }
-
     public int getIntensity() {
         return intensity;
     }
@@ -44,12 +49,24 @@ public class MoodDetail {
         this.intensity = intensity;
     }
 
+    public int getWeekLabel() {
+        return weekLabel;
+    }
+
+    public void setWeekLabel(int weekLabel) {
+        this.weekLabel = weekLabel;
+    }
+
     public String getReason() {
         return reason;
     }
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getDayOfWeek(){
+        return this.date.getDayOfWeek().toString().toLowerCase();
     }
 
 }
