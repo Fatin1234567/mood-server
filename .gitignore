@@ -40,3 +40,6 @@ ask-resources.json
 .vscode
 lambda/node_modules
 /src/main/resources/application.properties
+/src/main/resources/application-dev.properties
+/src/main/resources/application-prod.properties
+/src/test/resources/application-test.properties
