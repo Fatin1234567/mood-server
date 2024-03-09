@@ -1,8 +1,10 @@
-package com.fatin.moodserver.Service;
+package com.fatin.moodserver;
 
 import com.fatin.moodserver.Model.MoodEntry;
 import com.fatin.moodserver.Model.Respose.InsightResponse.MoodSummaryResponse;
 import com.fatin.moodserver.Model.UserAccount;
+import com.fatin.moodserver.Service.MoodEntryService;
+import com.fatin.moodserver.Service.MoodInsightService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
