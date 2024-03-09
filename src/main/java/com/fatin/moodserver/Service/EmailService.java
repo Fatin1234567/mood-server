@@ -13,8 +13,6 @@ public class EmailService {
     private Properties props;
     private Session session;
 
-
-
     @Value("${email}")
     private String email;
     @Value("${password}")
@@ -27,10 +25,10 @@ public class EmailService {
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
+
         // Initialize session here or in the sendEmail method
     }
 
-    // Constructor that accepts custom properties
     public EmailService(Properties props) {
         this.props = props;
     }
@@ -38,7 +36,7 @@ public class EmailService {
     public boolean sendWelcomeEmail(String toEmail, String name) {
         String subject = "Welcome to MoodTracker Application!";
         String body = "Dear " + name + ",\n\n" +
-                "Welcome to MoodTracker application! Here is our website to check how you can interact with the application: https://www.moodtracker.com";
+                "Welcome to MoodTracker application! Here is our website to check how you can interact with the application: https://fatin1234567.github.io/MoodTrackerGuide/" + "\n\n" + "Best"+ ",\n" +" Fatin";
 
         return sendEmail(toEmail, subject, body);
     }

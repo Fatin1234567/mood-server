@@ -2,6 +2,7 @@ package com.fatin.moodserver.Controller;
 
 import com.fatin.moodserver.Model.UserInfoResponse;
 import com.fatin.moodserver.Model.UserRegistrationResponse;
+import com.fatin.moodserver.Service.EmailService;
 import com.fatin.moodserver.Service.UserInfoService;
 import com.fatin.moodserver.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,12 @@ public class UserController {
     private final UserInfoService userInfoService;
     private final UserService userService;
 
-    public UserController(UserInfoService userInfoService, UserService userService) {
+    private final EmailService emailService;
+
+    public UserController(UserInfoService userInfoService, UserService userService, EmailService emailService) {
         this.userInfoService = userInfoService;
         this.userService = userService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/exists")
@@ -40,9 +44,18 @@ public class UserController {
     public ResponseEntity<UserRegistrationResponse> registerUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
         String accessToken = authorizationHeader.replace("Bearer ", "");
         UserRegistrationResponse response = userService.registerUser(accessToken);
+        if (!response.isRegistered()) emailService.sendWelcomeEmail(response.getEmail(), response.getUsername());
         return ResponseEntity.ok(response);
 
     }
+
+    @GetMapping("/testEmail")
+    public boolean testEmail() {
+        return emailService.sendWelcomeEmail("sghsdjjdkd@gmail.com","Fatin");
+    }
+
+
+
 
 
 

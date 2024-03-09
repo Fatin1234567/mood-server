@@ -20,7 +20,7 @@ public class UserRegistrationResponse {
     }
 
     // Getters
-    public boolean isSuccess() {
+    public boolean isRegistered() {
         return isRegistered;
     }
 
