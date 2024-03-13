@@ -24,22 +24,6 @@ public class UserController {
         this.userService = userService;
         this.emailService = emailService;
     }
-
-    @GetMapping("/exists")
-    public boolean userExists(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
-        String accessToken = authorizationHeader.replace("Bearer ", "");
-        String email = userInfoService.getUserEmail(accessToken);
-        return userService.userExist(email);
-    }
-
-    @GetMapping("/name")
-    public String getUserName(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
-        // Extract the token from the Authorization header
-        String accessToken = authorizationHeader.replace("Bearer ", "");
-        String email = userInfoService.getUserEmail(accessToken);
-        return userInfoService.getUserName(accessToken);
-    }
-
     @PostMapping("/register")
     public ResponseEntity<UserRegistrationResponse> registerUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
         String accessToken = authorizationHeader.replace("Bearer ", "");
@@ -51,7 +35,7 @@ public class UserController {
 
     @GetMapping("/testEmail")
     public boolean testEmail() {
-        return emailService.sendWelcomeEmail("sghsdjjdkd@gmail.com","Fatin");
+        return emailService.sendWelcomeEmail("sghsdjjdkd@gmail.com","Dilkush");
     }
 
 

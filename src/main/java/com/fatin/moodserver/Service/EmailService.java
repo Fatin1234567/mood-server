@@ -35,10 +35,21 @@ public class EmailService {
 
     public boolean sendWelcomeEmail(String toEmail, String name) {
         String subject = "Welcome to MoodTracker Application!";
-        String body = "Dear " + name + ",\n\n" +
-                "Welcome to MoodTracker application! Here is our website to check how you can interact with the application: https://fatin1234567.github.io/MoodTrackerGuide/" + "\n\n" + "Best"+ ",\n" +" Fatin";
-
+        String body = createWelcomeEmailBody(name);
         return sendEmail(toEmail, subject, body);
+    }
+    private String createWelcomeEmailBody(String name) {
+        return String.format(
+                "Dear %s,%n%n" +
+                        "Welcome you to the MoodTracker application. " +
+                        "For guidance on how to effectively engage with the application, " +
+                        "please visit the website at:%n" +
+                        "https://fatin1234567.github.io/MoodTrackerGuide/%n%n" +
+                        "If you require further assistance or have any inquiries, " +
+                        "please do not hesitate to reach out.%n%n" +
+                        "Warm regards,%n" +
+                        "Fatin",
+                name);
     }
 
     private boolean sendEmail(String toEmail, String subject, String body) {

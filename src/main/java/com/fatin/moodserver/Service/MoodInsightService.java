@@ -1,5 +1,6 @@
 package com.fatin.moodserver.Service;
 
+import com.fatin.moodserver.Model.AnomalyDetectionResponse;
 import com.fatin.moodserver.Model.MoodEntry;
 import com.fatin.moodserver.Model.Respose.InsightResponse.MoodDetail;
 import com.fatin.moodserver.Model.Respose.InsightResponse.MoodSummaryResponse;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.HashMap;
@@ -20,10 +20,18 @@ import java.util.stream.Collectors;
 public class MoodInsightService {
 
     private final MoodEntryService moodEntryService;
+    private final PythonDataService pythonDataService;
 
-    public MoodInsightService(MoodEntryService moodEntryService){
+    public MoodInsightService(MoodEntryService moodEntryService, PythonDataService pythonDataService){
         this.moodEntryService = moodEntryService;
+        this.pythonDataService = pythonDataService;
     }
+
+    public AnomalyDetectionResponse getAnomaly(UserAccount user){
+        return pythonDataService.processMoodData(user);
+    }
+
+
 
     public MoodSummaryResponse getSummaryInsight(UserAccount userAccount, String timeFrame) {
         LocalDateTime startDateTime = calculateStartDate(timeFrame);

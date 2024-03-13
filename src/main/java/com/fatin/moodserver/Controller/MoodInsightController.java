@@ -1,6 +1,7 @@
 package com.fatin.moodserver.Controller;
 
 
+import com.fatin.moodserver.Model.AnomalyDetectionResponse;
 import com.fatin.moodserver.Model.Respose.InsightResponse.MoodSummaryResponse;
 import com.fatin.moodserver.Service.MoodInsightService;
 import com.fatin.moodserver.Service.UserInfoService;
@@ -30,6 +31,20 @@ public class MoodInsightController {
         MoodSummaryResponse moodSummaryResponse = moodInsightService.getSummaryInsight(userService.getUser(email), timeframe);
         return moodSummaryResponse;
     }
+
+/*    @GetMapping("/anomaly")
+    public boolean getAnomaly(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+        String accessToken = authorizationHeader.replace("Bearer ", "");
+        String email = userInfoService.getUserEmail(accessToken);
+        MoodSummaryResponse moodSummaryResponse = moodInsightService.getSummaryInsight(userService.getUser(email), timeframe);
+        return moodSummaryResponse;
+    }*/
+
+    @GetMapping("/anomaly")
+    public AnomalyDetectionResponse getAnomalyTest() {
+        return moodInsightService.getAnomaly(userService.getUser("fatinkaziii@gmail.com"));
+    }
+
 
 
 

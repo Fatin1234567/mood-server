@@ -6,7 +6,6 @@ import com.fatin.moodserver.Model.UserInfoResponse;
 import com.fatin.moodserver.Model.UserRegistrationResponse;
 import com.fatin.moodserver.Repository.UserRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
